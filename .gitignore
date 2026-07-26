@@ -1,0 +1,11 @@
+# Build artifacts
+
+build/
+.venv/
+__pycache__/
+*.pyc
+
+# Other folders
+
+other/
+results/
