@@ -117,7 +117,7 @@ run_full() {
     echo 'Running TTNN Python op benchmarks...'
     run_with_profiling "ttnn_ops" "$RESULTS/ttnn_ops.txt" \
         env -u TT_METAL_DEVICE_PROFILER PYTHONPATH="" /opt/venv/bin/python3 "$THESIS/benchmarks/ttnn_ops/bench_ttnn_ops.py" \
-                "$RESULTS/ttnn_ops.csv" \
+                "$RESULTS/ttnn_ops.csv" "$RESULTS/ttnn_oob_matmul.csv" \
         || echo "Warning: TTNN Python benchmark failed — skipping (check ttnn installation)"
 }
 

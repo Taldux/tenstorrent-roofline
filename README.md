@@ -26,7 +26,7 @@ tt-analysis/
   `run_benchmarks.sh` (adjust the `CONTAINER` path at the top of that script
   for your own image, or run the built binaries directly on a host that
   already has the SDK available)
-- Python 3 + `ttnn` + `torch` (only needed for `benchmarks/ttnn_ops/bench_ttnn_ops.py`)
+- Python 3 + `ttnn` (only needed for `benchmarks/ttnn_ops/bench_ttnn_ops.py`)
 
 ## Running
 
