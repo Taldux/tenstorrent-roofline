@@ -141,4 +141,5 @@ fig.suptitle("Per-kernel device profiler breakdown — Wormhole n300", fontsize=
 plt.tight_layout()
 out = PLOTS / "kernel_profile.png"
 fig.savefig(out, dpi=150, bbox_inches="tight")
+fig.savefig(out.with_suffix(".pdf"), bbox_inches="tight")
 print(f"Saved {out}")

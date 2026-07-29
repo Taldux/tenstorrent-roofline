@@ -277,6 +277,7 @@ ax.legend(fontsize=8.5, loc="upper left", framealpha=0.9)
 plt.tight_layout()
 out1 = PLOTS / "roofline.png"
 fig.savefig(out1, dpi=150)
+fig.savefig(out1.with_suffix(".pdf"))
 print(f"Saved {out1}")
 
 # Figure 2: Tile size sweep
@@ -333,6 +334,7 @@ if tile_sweep or tile_sweep_hifi4:
     plt.tight_layout()
     out3 = PLOTS / "tile_sweep.png"
     fig3.savefig(out3, dpi=150, bbox_inches="tight")
+    fig3.savefig(out3.with_suffix(".pdf"), bbox_inches="tight")
     print(f"Saved {out3}")
 
 # Figure 3: fidelity x format sweep
@@ -386,6 +388,7 @@ if fidelity_matrix:
     plt.tight_layout()
     out5 = PLOTS / "fidelity_matrix.png"
     fig5.savefig(out5, dpi=150, bbox_inches="tight")
+    fig5.savefig(out5.with_suffix(".pdf"), bbox_inches="tight")
     print(f"Saved {out5}")
 
 # Figure 4: DRAM bandwidth vs core count sweep
@@ -432,5 +435,6 @@ if core_sweep:
     plt.tight_layout()
     out6 = PLOTS / "bandwidth_sweep.png"
     fig6.savefig(out6, dpi=150, bbox_inches="tight")
+    fig6.savefig(out6.with_suffix(".pdf"), bbox_inches="tight")
     print(f"Saved {out6}")
 
