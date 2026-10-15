@@ -5,11 +5,11 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-# link to my own build of tt-metalium in the hawaii cluster, you may need to build it 
+# link to my own build of tt-metalium in the hawaii cluster, you may need to build it
 # first and change this if you want to run anywhere else
-set(TT_METAL_HOME "/csghome/sc323/tt-metal"        CACHE PATH "tt-metal source root")
-set(TT_BUILD      "${TT_METAL_HOME}/build_Release" CACHE PATH "tt-metal build directory")
-set(CPM           "${TT_METAL_HOME}/.cpmcache"      CACHE PATH "CPM cache directory")
+set(TT_METAL_HOME "/csghome/sc323/tt-metal" CACHE PATH "tt-metal source root")
+set(TT_BUILD "${TT_METAL_HOME}/build_Release" CACHE PATH "tt-metal build directory")
+set(CPM "${TT_METAL_HOME}/.cpmcache" CACHE PATH "CPM cache directory")
 
 set(DEPS "${TT_BUILD}/_deps")
 
@@ -20,13 +20,13 @@ set(TT_RPATH_DIRS
     "${TT_BUILD}/tt_metal/third_party/umd/lib"
 )
 set(CMAKE_INSTALL_RPATH ${TT_RPATH_DIRS})
-set(CMAKE_BUILD_RPATH   ${TT_RPATH_DIRS})
+set(CMAKE_BUILD_RPATH ${TT_RPATH_DIRS})
 
 # Some imported targets from the build release of tt-metal
 add_library(tt_umd SHARED IMPORTED GLOBAL)
 set_target_properties(tt_umd PROPERTIES
     IMPORTED_LOCATION
-        "${TT_BUILD}/tt_metal/third_party/umd/lib/libtt-umd.so"
+    "${TT_BUILD}/tt_metal/third_party/umd/lib/libtt-umd.so"
 )
 
 add_library(tt_stl SHARED IMPORTED GLOBAL)
@@ -52,26 +52,32 @@ set_target_properties(flatbuffers PROPERTIES
 # main tt-metalium library
 add_library(tt_metal SHARED IMPORTED GLOBAL)
 set_target_properties(tt_metal PROPERTIES
-    IMPORTED_LOCATION    "${TT_BUILD}/tt_metal/libtt_metal.so"
+    IMPORTED_LOCATION "${TT_BUILD}/tt_metal/libtt_metal.so"
     INTERFACE_LINK_LIBRARIES "tt_umd;tt_stl;spdlog;yaml_cpp;flatbuffers"
 )
 
 # Include paths for compiling against tt-metalium out-of-tree
 target_include_directories(tt_metal INTERFACE
+
     # Core public API
     "${TT_METAL_HOME}"
     "${TT_METAL_HOME}/tt_metal"
     "${TT_METAL_HOME}/tt_metal/api"
     "${TT_METAL_HOME}/tt_metal/api/tt-metalium"
     "${TT_METAL_HOME}/tt_stl"
+
     # UMD device API
     "${TT_METAL_HOME}/tt_metal/third_party/umd/device/api"
+
     # Host/device shared headers
     "${TT_METAL_HOME}/tt_metal/hostdevcommon/api"
+
     # Kernel-side hardware headers (needed for host-side TensorAccessorArgs)
     "${TT_METAL_HOME}/tt_metal/hw/inc/api"
+
     # Generated / post-build headers
     "${TT_BUILD}/tt_metal"
+
     # CPM vendored dependency headers
     "${CPM}/nlohmann_json/798e0374658476027d9723eeb67a262d0f3c8308/include"
     "${CPM}/fmt/69912fb6b71fcb1f7e5deca191a2bb4748c4e7b6/include"
@@ -94,5 +100,6 @@ endmacro()
 
 # benchmarks
 add_benchmark(peak_bandwidth benchmarks/peak_bandwidth/peak_bandwidth.cpp)
-add_benchmark(peak_flops     benchmarks/peak_flops/peak_flops.cpp)
-add_benchmark(l1_bandwidth   benchmarks/l1_bandwidth/l1_bandwidth.cpp)
+add_benchmark(peak_flops benchmarks/peak_flops/peak_flops.cpp)
+add_benchmark(l1_bandwidth benchmarks/l1_bandwidth/l1_bandwidth.cpp)
+add_benchmark(peak_flops_block benchmarks/peak_flops_block/peak_flops_block.cpp)
