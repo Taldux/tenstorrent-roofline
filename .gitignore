@@ -9,4 +9,7 @@ __pycache__/
 
 other/
 results/
+results_*/
 thesis/
+paper/
+*.local.md
