@@ -3,7 +3,7 @@
 Empirical Roofline Model
 
 Usage:
-    python3 plots/plot_roofline.py
+    python3 plots/plot_roofline.py [results_dir] [out_dir]
 
 Requires:
     results/peak_bandwidth.txt
@@ -23,9 +23,10 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 import numpy as np
 
-RESULTS = Path(__file__).parent.parent / "results"
-PLOTS   = Path(__file__).parent
-PLOTS.mkdir(exist_ok=True)
+# optional: plot_roofline.py [results_dir] [out_dir]
+RESULTS = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(__file__).parent.parent / "results"
+PLOTS   = Path(sys.argv[2]) if len(sys.argv) > 2 else Path(__file__).parent
+PLOTS.mkdir(parents=True, exist_ok=True)
 
 
 def parse_bandwidth(path: Path) -> float:
