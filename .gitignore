@@ -11,5 +11,6 @@ other/
 results/
 results_*/
 thesis/
-paper/
+paper/*
+!paper/figures/
 *.local.md
